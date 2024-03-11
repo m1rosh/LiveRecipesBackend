@@ -7,7 +7,12 @@ class Command(BaseCommand):
 
     """def add_arguments(self, parser):
         parser.add_argument("num", type=int)"""
-
+    tags = ['dessert', 'garnish', 'drink', 'firstDish', 'salad',
+            'sauce', 'secondDish', 'bakery', 'harvesting', 'snack'
+            ]
+    for tag in tags:
+        t = Tag(dish_type=tag)
+        t.save()
     def handle(self, *args, **kwargs):
         self.stdout.write(str('running'))
 

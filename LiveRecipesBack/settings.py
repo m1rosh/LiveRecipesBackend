@@ -81,7 +81,7 @@ DATABASES = {
         'NAME': 'LiveRecipes',
         'USER': 'postgres',
         'PASSWORD': 'qwerty',
-        'HOST': 'localhost',
+        'HOST': '0.0.0.0',
         'PORT': '5433'
     }
 }
