@@ -1,6 +1,9 @@
+import os
+
 from django.core.management.base import BaseCommand
 import json
 from liveRecipes.models import *
+
 
 class Command(BaseCommand):
     help = 'disp hello'
@@ -11,8 +14,10 @@ class Command(BaseCommand):
             'sauce', 'secondDish', 'bakery', 'harvesting', 'snack'
             ]
     for tag in tags:
-        t = Tag(dish_type=tag)
-        t.save()
+        if not Tag.objects.filter(dish_type=tag):
+            t = Tag(dish_type=tag)
+            t.save()
+
     def handle(self, *args, **kwargs):
         self.stdout.write(str('running'))
 
@@ -20,7 +25,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='dessert'))
             one_recipe.save()
@@ -29,7 +33,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='garnish'))
             one_recipe.save()
@@ -38,7 +41,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='drink'))
             one_recipe.save()
@@ -46,7 +48,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='firstDish'))
             one_recipe.save()
@@ -54,7 +55,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='salad'))
             one_recipe.save()
@@ -62,7 +62,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='sauce'))
             one_recipe.save()
@@ -70,7 +69,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='secondDish'))
             one_recipe.save()
@@ -79,7 +77,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='bakery'))
             one_recipe.save()
@@ -88,7 +85,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='harvesting'))
             one_recipe.save()
@@ -97,9 +93,6 @@ class Command(BaseCommand):
             data = json.load(f)
 
         for recipe in data['all_recipes']:
-
             one_recipe = Recipe.objects.create(**recipe)
             one_recipe.tag.add(Tag.objects.get(dish_type='snack'))
             one_recipe.save()
-
-

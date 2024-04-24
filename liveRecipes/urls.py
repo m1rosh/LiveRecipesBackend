@@ -3,6 +3,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from . import views
 
 urlpatterns = [
+    path('id/<int:id>/', views.OneRecipeInfo.as_view()),
+    path('main_page/', views.MainPageRecipeList.as_view()),
     path('all_recipes/', views.RecipeList.as_view()),
     path('desserts/', views.DessertsList.as_view()),
     path('garnish/', views.GarnishList.as_view()),

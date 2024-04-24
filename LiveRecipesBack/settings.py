@@ -77,13 +77,17 @@ WSGI_APPLICATION = 'LiveRecipesBack.wsgi.application'
 
 DATABASES = {
     'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'db.sqlite3'
+    },
+    'default2': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'LiveRecipes',
         'USER': 'postgres',
         'PASSWORD': 'qwerty',
         'HOST': '0.0.0.0',
         'PORT': '5433'
-    }
+}
 }
 
 
@@ -121,7 +125,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/Users/s_mirosh/PycharmProjects/LiveRecipesDjango/LiveRecipesBack/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

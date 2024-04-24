@@ -1,17 +1,10 @@
 from django.db import models
 
 
-class Tag(models.Model):
-    dish_type = models.CharField()
-
-    def __str__(self):
-        return self.dish_type
-
-
 class Recipe(models.Model):
     name = models.TextField()
     bzy = models.JSONField()
-    duration = models.CharField()
+    duration = models.CharField(max_length=255)
     photo = models.TextField()
     description = models.TextField()
     ingredients = models.JSONField()
@@ -20,3 +13,10 @@ class Recipe(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Tag(models.Model):
+    dish_type = models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.dish_type
