@@ -21,5 +21,6 @@ from liveRecipes import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('liveRecipes.urls')),
+    path('', views.backend_info),
     path('procces/', views.process_data, name='procces_data')
 ]

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Информация</h1>
+<a href = "{% url 'desserts' %}" >/desserts - десерты</a>
+<br>
+<a href = "{% url 'garnish' %}" >/garnish - гарниры</a>
+<br>
+<a href = "{% url 'drinks' %}" >/drinks - напитки</a>
+<br>
+<a href = "{% url 'first_dishes' %}" >/first_dishes - первые блюда</a>
+<br>
+<a href = "{% url 'second_dishes' %}" >/second_dishes - вторые блюда</a>
+<br>
+<a href = "{% url 'salads' %}" >/salads - салаты</a>
+<br>
+<a href = "{% url 'sauces' %}" >/sauces - соусы</a>
+<br>
+<a href = "{% url 'bakery' %}" >/bakery - выпечка</a>
+<br>
+<a href = "{% url 'harvesting' %}" >/harvesting - заготовки</a>
+<br>
+<a href = "{% url 'snacks' %}" >/snacks - закуски</a>
+<br>
+<h2>Информация об одном рецепте</h2>
+<p>после id можно указать любую цифру от 1 до 375</p>
+<a href = "{% url 'one_recipe' id=1%}" >/id/1</a>
+<h2>Поиск</h2>
+<p>будут выведены все рецепты, имя которых содержит слово после '=' </p>
+<a href = "{% url 'queryset' query='суп'%}" >/queryset=суп</a>
+<h2>Лента с рецептами</h2>
+<p>Первая страница ленты: (на одной странице 15 рецептов)</p>
+<a href = "{% url 'recipes_feed' %}" >/recipes_feed</a>
+<br>
+<p>Добавьте к ссылке выше /?page=номер_страницы и получите еще 15 рецептов: (доступно 25 страниц)</p>
+<a href="/recipes_feed/?page=2">/recipes_feed/?page=2</a>
+</body>
+</html>

@@ -1,25 +1,53 @@
+from django.shortcuts import render
 from rest_framework import generics
+from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.response import Response
+
 from . import serializers
 from django.contrib.auth.models import User
 from .models import *
 from django.views.decorators.csrf import csrf_exempt
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 
 
 @csrf_exempt
 def process_data(request):
     if request.method == 'POST':
-        # Получаем данные из запроса
-        data = request.body  # Для данных формы
-        # data = request.body  # Для данных в формате JSON
-
-        # Обработка данных
-        # Например, вы можете сохранить данные в модели или выполнить другие операции
+        data = request.body
         print(data)
-        # Возвращаем ответ
         return JsonResponse({'message': 'Data processed '})
     else:
         return JsonResponse({'error': 'Only POST requests are allowed'})
+
+
+def backend_info(request):
+    return render(request, 'info.html')
+
+
+class CustomPagination(PageNumberPagination):
+    page_size = 15
+
+    def get_paginated_response(self, data):
+        return Response(data)
+
+
+@api_view(['GET'])
+def recipes_feed(request):
+    queryset = Recipe.objects.all()
+    paginator = CustomPagination()
+    result_page = paginator.paginate_queryset(queryset, request)
+    serializer = serializers.MainPageRecipeSerializer(result_page, many=True)
+    return paginator.get_paginated_response(serializer.data)
+
+
+@api_view(['GET'])
+def search(request, query):
+    queryset = Recipe.objects.all()
+    if query:
+        queryset = queryset.filter(name__icontains=query)
+    serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
+    return Response(serializer.data)
 
 
 class MainPageRecipeList(generics.ListAPIView):
