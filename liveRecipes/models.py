@@ -4,7 +4,7 @@ from django.db import models
 class Recipe(models.Model):
     name = models.TextField()
     bzy = models.JSONField()
-    duration = models.CharField(max_length=255)
+    duration = models.IntegerField()
     photo = models.TextField()
     description = models.TextField()
     ingredients = models.JSONField()
