@@ -17,6 +17,10 @@ urlpatterns = [
     path('harvesting/', views.HarvestingList.as_view(), name='harvesting'),
     path('snacks/', views.SnackList.as_view(), name='snacks'),
     path('queryset=<str:query>/', views.search, name='queryset'),
+    path('salads/querysetBreakfast=<str:query>/', views.searchBreakfast, name='querysetBreakfast'),
+    path('first_dishes/querysetLunch=<str:query>/', views.searchLunch, name='querysetLunch'),
+    path('second_dishes/querysetDinner=<str:query>/', views.searchDinner, name='querysetDinner'),
+    path('snacks/querysetSnack=<str:query>/', views.searchSnack, name='querysetSnack'),
     path('recipes_feed/', views.recipes_feed, name='recipes_feed')
 ]
 

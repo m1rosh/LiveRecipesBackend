@@ -45,7 +45,7 @@ def recipes_feed(request):
 def search(request, query):
     queryset = Recipe.objects.all()
     if query:
-        queryset = queryset.filter(name__icontains=query)
+        queryset = queryset.filter(name__iregex=query)
     serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
     return Response(serializer.data)
 
@@ -144,3 +144,35 @@ class SnackList(generics.ListAPIView):
         serializer_class = serializers.RecipeSerializer
     except:
         pass
+
+@api_view(['GET'])
+def searchBreakfast(request, query):
+    queryset = Tag.objects.filter(dish_type='salad')[0].recipes.all()
+    if query:
+        queryset = queryset.filter(name__iregex=query)
+    serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def searchLunch(request, query):
+    queryset = Tag.objects.filter(dish_type='firstDish')[0].recipes.all()
+    if query:
+        queryset = queryset.filter(name__iregex=query)
+    serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def searchDinner(request, query):
+    queryset = Tag.objects.filter(dish_type='secondDish')[0].recipes.all()
+    if query:
+        queryset = queryset.filter(name__iregex=query)
+    serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def searchSnack(request, query):
+    queryset = Tag.objects.filter(dish_type='snack')[0].recipes.all()
+    if query:
+        queryset = queryset.filter(name__iregex=query)
+    serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
+    return Response(serializer.data)
