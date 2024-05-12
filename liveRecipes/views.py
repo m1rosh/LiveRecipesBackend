@@ -70,7 +70,7 @@ class RecipeList(generics.ListAPIView):
 class DessertsList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='dessert')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -78,7 +78,7 @@ class DessertsList(generics.ListAPIView):
 class GarnishList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='garnish')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -86,7 +86,7 @@ class GarnishList(generics.ListAPIView):
 class DrinksList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='drink')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -94,7 +94,7 @@ class DrinksList(generics.ListAPIView):
 class FirstDishList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='firstDish')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -102,7 +102,7 @@ class FirstDishList(generics.ListAPIView):
 class SecondDishList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='secondDish')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -110,7 +110,7 @@ class SecondDishList(generics.ListAPIView):
 class SaladsList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='salad')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -118,7 +118,7 @@ class SaladsList(generics.ListAPIView):
 class SauceList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='sauce')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -126,7 +126,7 @@ class SauceList(generics.ListAPIView):
 class BakeryList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='bakery')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -134,7 +134,7 @@ class BakeryList(generics.ListAPIView):
 class HarvestingList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='harvesting')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 
@@ -142,7 +142,7 @@ class HarvestingList(generics.ListAPIView):
 class SnackList(generics.ListAPIView):
     try:
         queryset = Tag.objects.filter(dish_type='snack')[0].recipes.all()
-        serializer_class = serializers.RecipeSerializer
+        serializer_class = serializers.MainPageRecipeSerializer
     except:
         pass
 

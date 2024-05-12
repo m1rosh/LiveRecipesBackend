@@ -8,6 +8,7 @@ class Recipe(models.Model):
     photo = models.TextField()
     description = models.TextField()
     ingredients = models.JSONField()
+    ingredientsOneString = models.TextField()
     steps = models.JSONField()
     tag = models.ManyToManyField('Tag', related_name='recipes', null=True, blank=True)
 
