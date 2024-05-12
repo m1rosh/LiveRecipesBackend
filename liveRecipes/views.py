@@ -1,3 +1,4 @@
+from django.db.models.functions import Length
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -175,4 +176,60 @@ def searchSnack(request, query):
     if query:
         queryset = queryset.filter(name__iregex=query)
     serializer = serializers.MainPageRecipeSerializer(queryset, many=True)
+    return Response(serializer.data)
+
+# class Filters(generics.ListAPIView):
+#     queryset = Recipe.objects.all()
+#     serializer_class = serializers.RecipeSerializer
+
+@api_view(['GET'])
+def filtersSearch(request):
+    queryset = Recipe.objects.all()
+
+    query = request.GET.get('query', None)
+    caloriesl = request.GET.get('caloriesl', None)
+    proteinl = request.GET.get('proteinl', None)
+    fatsl = request.GET.get('fatsl', None)
+    carbohydratesl = request.GET.get('carbohydratesl', None)
+    caloriesm = request.GET.get('caloriesm', None)
+    proteinm = request.GET.get('proteinm', None)
+    fatsm = request.GET.get('fatsm', None)
+    carbohydratesm = request.GET.get('carbohydratesm', None)
+    duration = request.GET.get('duration', None)
+    ingredient1y = request.GET.get('ingredient1y', None)
+
+    if query:
+        queryset = queryset.filter(name__iregex=query)
+    if caloriesl:
+        queryset = queryset.filter(bzy__calories__lte=caloriesl)
+        queryset = queryset.annotate(text_len=Length('bzy__calories')).filter(text_len__lte=len(caloriesl))
+    if proteinl:
+        queryset = queryset.filter(bzy__protein__lte=proteinl)
+        queryset = queryset.annotate(text_len=Length('bzy__protein')).filter(text_len__lte=len(proteinl))
+    if fatsl:
+        queryset = queryset.filter(bzy__fats__lte=fatsl)
+        queryset = queryset.annotate(text_len=Length('bzy__calories')).filter(text_len__lte=len(fatsl))
+    if carbohydratesl:
+        queryset = queryset.filter(bzy__carbohydrates__lte=carbohydratesl)
+        queryset = queryset.annotate(text_len=Length('bzy__carbohydrates')).filter(text_len__lte=len(carbohydratesl))
+    if caloriesm:
+        queryset = queryset.filter(bzy__calories__gte=caloriesm)
+        queryset = queryset.annotate(text_len=Length('bzy__calories')).filter(text_len__gte=len(caloriesm))
+    if proteinm:
+        queryset = queryset.filter(bzy__protein__gte=proteinm)
+        queryset = queryset.annotate(text_len=Length('bzy__protein')).filter(text_len__gte=len(proteinm))
+    if fatsm:
+        queryset = queryset.filter(bzy__fats__gte=fatsm)
+        queryset = queryset.annotate(text_len=Length('bzy__fats')).filter(text_len__gte=len(fatsm))
+    if carbohydratesm:
+        queryset = queryset.filter(bzy__carbohydrates__gte=carbohydratesm)
+        queryset = queryset.annotate(text_len=Length('bzy__carbohydrates')).filter(text_len__gte=len(carbohydratesm))
+    if duration:
+        queryset = queryset.filter(duration__lte=duration)
+        queryset = queryset.annotate(text_len=Length(str('duration'))).filter(text_len__lte=len(str(duration)))
+    if ingredient1y:
+        queryset = queryset.filter(ingredients__iregex=ingredient1y)
+
+
+    serializer = serializers.FilterSearchRecipeSerializer(queryset, many=True)
     return Response(serializer.data)

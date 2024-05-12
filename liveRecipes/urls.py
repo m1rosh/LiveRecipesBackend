@@ -21,6 +21,7 @@ urlpatterns = [
     path('first_dishes/querysetLunch=<str:query>/', views.searchLunch, name='querysetLunch'),
     path('second_dishes/querysetDinner=<str:query>/', views.searchDinner, name='querysetDinner'),
     path('snacks/querysetSnack=<str:query>/', views.searchSnack, name='querysetSnack'),
+    path('filters/', views.filtersSearch, name='filters'),
     path('recipes_feed/', views.recipes_feed, name='recipes_feed')
 ]
 

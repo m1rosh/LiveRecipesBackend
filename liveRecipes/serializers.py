@@ -26,3 +26,15 @@ class MainPageRecipeSerializer(serializers.ModelSerializer):
         representation = super().to_representation(instance)
         representation['tag'] = tags_encoding[representation['tag'][0]]
         return representation
+
+
+
+class FilterSearchRecipeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Recipe
+        fields = ['id', 'name', 'photo', 'tag', 'bzy', 'duration', 'ingredients']
+
+    def to_representation(self, instance):
+        representation = super().to_representation(instance)
+        representation['tag'] = tags_encoding[representation['tag'][0]]
+        return representation
