@@ -196,6 +196,18 @@ def filtersSearch(request):
     fatsm = request.GET.get('fatsm', None)
     carbohydratesm = request.GET.get('carbohydratesm', None)
     duration = request.GET.get('duration', None)
+    ingredient2y = request.GET.get('ingredient2y', None)
+    ingredient2n = request.GET.get('ingredient2n', None)
+    keyword2 = request.GET.get('keyword2', None)
+    ingredient3y = request.GET.get('ingredient3y', None)
+    ingredient3n = request.GET.get('ingredient3n', None)
+    keyword3 = request.GET.get('keyword3', None)
+    ingredient4y = request.GET.get('ingredient4y', None)
+    ingredient4n = request.GET.get('ingredient4n', None)
+    keyword4 = request.GET.get('keyword4', None)
+    ingredient5y = request.GET.get('ingredient5y', None)
+    ingredient5n = request.GET.get('ingredient5n', None)
+    keyword5 = request.GET.get('keyword5', None)
     ingredient1y = request.GET.get('ingredient1y', None)
     ingredient1n = request.GET.get('ingredient1n', None)
     keyword1 = request.GET.get('keyword1', None)
@@ -235,6 +247,30 @@ def filtersSearch(request):
         queryset = queryset.exclude(ingredientsOneString__iregex=ingredient1n)
     if keyword1:
         queryset = queryset.filter(description__iregex=keyword1)
+    if ingredient2y:
+        queryset = queryset.filter(ingredientsOneString__iregex=ingredient2y)
+    if ingredient2n:
+        queryset = queryset.exclude(ingredientsOneString__iregex=ingredient2n)
+    if keyword2:
+        queryset = queryset.filter(description__iregex=keyword2)
+    if ingredient3y:
+        queryset = queryset.filter(ingredientsOneString__iregex=ingredient3y)
+    if ingredient3n:
+        queryset = queryset.exclude(ingredientsOneString__iregex=ingredient3n)
+    if keyword3:
+        queryset = queryset.filter(description__iregex=keyword3)
+    if ingredient4y:
+        queryset = queryset.filter(ingredientsOneString__iregex=ingredient4y)
+    if ingredient4n:
+        queryset = queryset.exclude(ingredientsOneString__iregex=ingredient4n)
+    if keyword4:
+        queryset = queryset.filter(description__iregex=keyword4)
+    if ingredient5y:
+        queryset = queryset.filter(ingredientsOneString__iregex=ingredient5y)
+    if ingredient5n:
+        queryset = queryset.exclude(ingredientsOneString__iregex=ingredient5n)
+    if keyword5:
+        queryset = queryset.filter(description__iregex=keyword5)
 
 
 

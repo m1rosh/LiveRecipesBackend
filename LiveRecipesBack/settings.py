@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-bfs3p+5s4w29a6(!q3p&4ree2m&p4b$l+enr7%pai$imlnd)39
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', 'liverecipes.online']
 
 
 # Application definition
