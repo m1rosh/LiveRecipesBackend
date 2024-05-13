@@ -64,7 +64,7 @@ class OneRecipeInfo(generics.RetrieveAPIView):
 
 class RecipeList(generics.ListAPIView):
     queryset = Recipe.objects.all()
-    serializer_class = serializers.RecipeSerializer
+    serializer_class = serializers.MainPageRecipeSerializer
 
 
 class DessertsList(generics.ListAPIView):
