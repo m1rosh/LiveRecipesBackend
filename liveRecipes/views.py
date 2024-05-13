@@ -197,6 +197,8 @@ def filtersSearch(request):
     carbohydratesm = request.GET.get('carbohydratesm', None)
     duration = request.GET.get('duration', None)
     ingredient1y = request.GET.get('ingredient1y', None)
+    ingredient1n = request.GET.get('ingredient1n', None)
+    keyword1 = request.GET.get('keyword1', None)
 
     if query:
         queryset = queryset.filter(name__iregex=query)
@@ -228,7 +230,12 @@ def filtersSearch(request):
         queryset = queryset.filter(duration__lte=duration)
         queryset = queryset.annotate(text_len=Length(str('duration'))).filter(text_len__lte=len(str(duration)))
     if ingredient1y:
-        queryset = queryset.filter(ingredients__iregex=ingredient1y)
+        queryset = queryset.filter(ingredientsOneString__iregex=ingredient1y)
+    if ingredient1n:
+        queryset = queryset.exclude(ingredientsOneString__iregex=ingredient1n)
+    if keyword1:
+        queryset = queryset.filter(description__iregex=keyword1)
+
 
 
     serializer = serializers.FilterSearchRecipeSerializer(queryset, many=True)

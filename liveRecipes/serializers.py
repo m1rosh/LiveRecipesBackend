@@ -32,7 +32,7 @@ class MainPageRecipeSerializer(serializers.ModelSerializer):
 class FilterSearchRecipeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Recipe
-        fields = ['id', 'name', 'photo', 'tag', 'bzy', 'duration', 'ingredients']
+        fields = ['id', 'name', 'photo', 'tag', 'bzy', 'duration', 'ingredientsOneString', 'description']
 
     def to_representation(self, instance):
         representation = super().to_representation(instance)
