@@ -36,7 +36,7 @@ class CustomPagination(PageNumberPagination):
 
 @api_view(['GET'])
 def recipes_feed(request):
-    queryset = Recipe.objects.all()
+    queryset = Recipe.objects.order_by('?')
     paginator = CustomPagination()
     result_page = paginator.paginate_queryset(queryset, request)
     serializer = serializers.MainPageRecipeSerializer(result_page, many=True)
@@ -65,7 +65,7 @@ class OneRecipeInfo(generics.RetrieveAPIView):
 
 class RecipeList(generics.ListAPIView):
     queryset = Recipe.objects.all()
-    serializer_class = serializers.RecipeSerializer
+    serializer_class = serializers.MainPageRecipeSerializer
 
 
 class DessertsList(generics.ListAPIView):
