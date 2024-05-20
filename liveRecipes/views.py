@@ -1,4 +1,5 @@
-from django.db.models.functions import Length
+from django.db.models.functions import Length, Cast
+from django.db.models import IntegerField
 from django.shortcuts import render
 from rest_framework import generics
 from rest_framework.decorators import api_view
@@ -182,6 +183,8 @@ def searchSnack(request, query):
 #     queryset = Recipe.objects.all()
 #     serializer_class = serializers.RecipeSerializer
 
+
+
 @api_view(['GET'])
 def filtersSearch(request):
     queryset = Recipe.objects.all()
@@ -215,32 +218,23 @@ def filtersSearch(request):
     if query:
         queryset = queryset.filter(name__iregex=query)
     if caloriesl:
-        queryset = queryset.filter(bzy__calories__lte=caloriesl)
-        queryset = queryset.annotate(text_len=Length('bzy__calories')).filter(text_len__lte=len(caloriesl))
+        queryset = queryset.annotate(intcal=Cast('bzy__calories', IntegerField())).filter(intcal__lte=int(caloriesl))
     if proteinl:
-        queryset = queryset.filter(bzy__protein__lte=proteinl)
-        queryset = queryset.annotate(text_len=Length('bzy__protein')).filter(text_len__lte=len(proteinl))
+        queryset = queryset.annotate(intprot=Cast('bzy__protein', IntegerField())).filter(intprot__lte=int(proteinl))
     if fatsl:
-        queryset = queryset.filter(bzy__fats__lte=fatsl)
-        queryset = queryset.annotate(text_len=Length('bzy__calories')).filter(text_len__lte=len(fatsl))
+        queryset = queryset.annotate(intfat=Cast('bzy__fats', IntegerField())).filter(intfat__lte=int(fatsl))
     if carbohydratesl:
-        queryset = queryset.filter(bzy__carbohydrates__lte=carbohydratesl)
-        queryset = queryset.annotate(text_len=Length('bzy__carbohydrates')).filter(text_len__lte=len(carbohydratesl))
+        queryset = queryset.annotate(intcarb=Cast('bzy__carbohydrates', IntegerField())).filter(intcarb__lte=int(carbohydratesl))
     if caloriesm:
-        queryset = queryset.filter(bzy__calories__gte=caloriesm)
-        queryset = queryset.annotate(text_len=Length('bzy__calories')).filter(text_len__gte=len(caloriesm))
+        queryset = queryset.annotate(intcal=Cast('bzy__calories', IntegerField())).filter(intcal__gte=int(caloriesm))
     if proteinm:
-        queryset = queryset.filter(bzy__protein__gte=proteinm)
-        queryset = queryset.annotate(text_len=Length('bzy__protein')).filter(text_len__gte=len(proteinm))
+        queryset = queryset.annotate(intprot=Cast('bzy__protein', IntegerField())).filter(intprot__gte=int(proteinm))
     if fatsm:
-        queryset = queryset.filter(bzy__fats__gte=fatsm)
-        queryset = queryset.annotate(text_len=Length('bzy__fats')).filter(text_len__gte=len(fatsm))
+        queryset = queryset.annotate(intfat=Cast('bzy__fats', IntegerField())).filter(intfat__gte=int(fatsm))
     if carbohydratesm:
-        queryset = queryset.filter(bzy__carbohydrates__gte=carbohydratesm)
-        queryset = queryset.annotate(text_len=Length('bzy__carbohydrates')).filter(text_len__gte=len(carbohydratesm))
+        queryset = queryset.annotate(intcarb=Cast('bzy__carbohydrates', IntegerField())).filter(intcarb__gte=int(carbohydratesm))
     if duration:
-        queryset = queryset.filter(duration__lte=duration)
-        queryset = queryset.annotate(text_len=Length(str('duration'))).filter(text_len__lte=len(str(duration)))
+        queryset = queryset.annotate(intdur=Cast('duration', IntegerField())).filter(intdur__lte=int(duration))
     if ingredient1y:
         queryset = queryset.filter(ingredientsOneString__iregex=ingredient1y)
     if ingredient1n:
@@ -271,8 +265,6 @@ def filtersSearch(request):
         queryset = queryset.exclude(ingredientsOneString__iregex=ingredient5n)
     if keyword5:
         queryset = queryset.filter(description__iregex=keyword5)
-
-
 
     serializer = serializers.FilterSearchRecipeSerializer(queryset, many=True)
     return Response(serializer.data)
